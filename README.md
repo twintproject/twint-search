@@ -60,15 +60,32 @@ twint -u username -es localhost:9200 --json -o /opt/twint/username.json
 open http://localhost:3000
 ```
 
-## Debug
-http://localhost:9200/twinttweets/_search?pretty=true&q=*:*
-http://localhost:9200/twinttweets/_count?pretty
+## Debug Elasticsearch
 
+```
+open http://localhost:9000
+open http://localhost:9200/twinttweets/_search?pretty=true&q=*:*
+open http://localhost:9200/twinttweets/_count?pretty
+```
 
 ### Screenshots
 ![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot1.png "Screenshot #1")
 
 ![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot2.png "Screenshot #2")
+
+## Known Issues :warning:
+
+I have noticed when running the new **5.0+** version on a linux host you need to increase the memory map areas with the following command
+
+``` bash
+sudo sysctl -w vm.max_map_count=262144
+```
+
+More at https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
+
+## Issues
+
+Find a bug? Want more features? Find something missing in the documentation? Let me know! Please don't hesitate to [file an issue](https://github.com/blacktop/docker-elasticsearch-alpine/issues/new)
 
 ## To do
 - Embed video in tweets
