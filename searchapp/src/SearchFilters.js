@@ -37,6 +37,21 @@ const SearchFilters = ({ currentTopics, setTopics, visible }) => (
 			/>
 		</div>
 		<div className="child m7">
+			<MultiDropdownList
+				componentId="place"
+				dataField="place"
+				placeholder="Select place"
+				title="Places"
+				filterLabel="Places"
+				showFilter={true}
+				size={100}
+				showCount={true}
+				queryFormat="and"
+				onValueChange={setTopics}
+				loader="Loading ..."
+			/>
+		</div>
+		<div className="child m7">
 			<SingleDropdownRange
 				componentId="date"
 				dataField="date"
