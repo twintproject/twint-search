@@ -3,9 +3,9 @@ version: '3.6'
 services:
 
   twint:
-    build: .
-    #  context: ./twint
-    #  dockerfile: Dockerfile
+    build:
+      context: ./twint
+      dockerfile: Dockerfile
     container_name: twint
     volumes:
     - './samples:/opt/twint'
