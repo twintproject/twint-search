@@ -73,6 +73,16 @@ const Results = ({ toggleTopic, currentTopics }) => (
 					sortBy: 'desc',
 				},
 				{
+					label: 'Most Recent',
+					dataField: 'created_at',
+					sortBy: 'desc',
+				},
+				{
+					label: 'Least Recent',
+					dataField: 'created_at',
+					sortBy: 'asc',
+				},
+				{
 					label: 'Most Likes',
 					dataField: 'nlikes',
 					sortBy: 'desc',
@@ -94,12 +104,12 @@ const Results = ({ toggleTopic, currentTopics }) => (
 				},
 				{
 					label: 'A to Z',
-					dataField: 'name.keyword',
+					dataField: 'username',
 					sortBy: 'asc',
 				},
 				{
 					label: 'Z to A',
-					dataField: 'name.keyword',
+					dataField: 'username',
 					sortBy: 'desc',
 				},
 				{

@@ -42,6 +42,7 @@ A few simple examples to help you understand the basics:
 ``` bash
 docker-compose run twint -u username -es elasticsearch:9200
 docker-compose run twint -u username -es elasticsearch:9200 --json -o /opt/twint/username.json
+USERNAME=username docker-compose run twint -u ${USERNAME} -es elasticsearch:9200 --json -o /opt/twint/${USERNAME}.json
 ```
 
 if local install of twint
@@ -58,6 +59,11 @@ twint -u username -es localhost:9200 --json -o /opt/twint/username.json
 ```
 open http://localhost:3000
 ```
+
+## Debug
+http://localhost:9200/twinttweets/_search?pretty=true&q=*:*
+http://localhost:9200/twinttweets/_count?pretty
+
 
 ### Screenshots
 ![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot1.png "Screenshot #1")
