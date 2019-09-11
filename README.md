@@ -50,7 +50,20 @@ twint -u username -es localhost:9200
 twint -u username -es localhost:9200 --json -o /opt/twint/username.json
 ```
 
-## Screenshots
+## Search engine
+
+- Allows to do faceted search
+- Current build is developpment so you can do change and re-compile in real-time.
+
+```
+open http://localhost:3000
+```
+
+### Screenshots
 ![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot1.png "Screenshot #1")
 
 ![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot2.png "Screenshot #2")
+
+## To do
+- Embed video in tweets
+- Tweet with images
