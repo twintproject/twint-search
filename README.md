@@ -51,4 +51,6 @@ twint -u username -es localhost:9200 --json -o /opt/twint/username.json
 ```
 
 ## Screenshots
+![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot1.png "Screenshot #1")
 
+![alt text](https://github.com/lucmski/twint-search/raw/master/docs/screenshot2.png "Screenshot #2")
