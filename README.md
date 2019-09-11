@@ -91,3 +91,6 @@ Find a bug? Want more features? Find something missing in the documentation? Let
 ## To do
 - Embed video in tweets
 - Tweet with images
+- Tweet with location
+- Filter re-tweets
+- All the most crazy things possible
