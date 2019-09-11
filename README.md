@@ -13,17 +13,20 @@ docker-compose build
 Start to up elaticsearch and searchapp
 
 ``` bash
+docker network create nw_twint
 docker-compose up -d elasticsearch searchapp twint
 ```
 
 ## Execute Twint command
 
 ``` bash
-docker-compose run -v $PWD/twint:/srv/twint twint {{CMD TWINT}}
+docker network create nw_twint
+docker-compose run -v $PWD/output:/srv/twint twint {{CMD TWINT}}
 ```
 
 ## Quick start
 ```
+docker network create nw_twint
 docker-compose up -d elasticsearch
 sleep 10
 docker-compose up -d searchapp
