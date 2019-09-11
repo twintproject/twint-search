@@ -41,6 +41,7 @@ A few simple examples to help you understand the basics:
 
 ``` bash
 docker-compose run twint -u username -es elasticsearch:9200
+docker-compose run twint -s "#osint" -es elasticsearch:9200
 docker-compose run twint -u username -es elasticsearch:9200 --json -o /opt/twint/username.json
 USERNAME=username docker-compose run twint -u ${USERNAME} -es elasticsearch:9200 --json -o /opt/twint/${USERNAME}.json
 ```
