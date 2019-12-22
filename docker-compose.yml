@@ -3,15 +3,11 @@ version: '3.6'
 services:
 
   twint:
-    build:
-      context: ./twint
-      dockerfile: Dockerfile
-    container_name: twint
-    volumes:
-    - './output:/opt/twint'
+    image: x0rxkov/twint:latest-alpine
     command: ["-h"]
 
   searchapp:
+    image: x0rxkov/twint-search:latest-alpine
     build:
       context: ./searchapp
       dockerfile: Dockerfile
@@ -44,12 +40,12 @@ services:
       context: ./elasticsearch
       dockerfile: Dockerfile
       args:
-        - CEREBRO_VERSION=0.7.2
+      - CEREBRO_VERSION=0.7.2
     container_name: elasticsearch
     entrypoint: /usr/share/elasticsearch/start
     ports:
-      - "9200:9200" # Elasticsearch
-      - "9000:9000" # Cerebro
+    - "9200:9200" # Elasticsearch
+    - "9000:9000" # Cerebro
     ulimits:
       memlock:
         soft: -1
@@ -66,7 +62,21 @@ services:
     image: docker.elastic.co/kibana/kibana:7.0.1
     container_name: kibana
     ports:
-      - 5601:5601
+    - 5601:5601
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+    # - pma_arbitrary=1
+    # - pma_host=mariadb
+      PMA_HOST: "mariadb"
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+    - db
+    ports:
+    - 8080:80
 
 volumes:
   esdata:
