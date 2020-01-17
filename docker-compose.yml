@@ -1,28 +1,40 @@
 ---
-version: '3.6'
+version: '3.7'
 services:
 
   twint:
-    build:
-      context: ./twint
-      dockerfile: Dockerfile
-    container_name: twint
-    volumes:
-    - './output:/opt/twint'
+    image: x0rzkov/twint:latest-alpine
     command: ["-h"]
+    networks:
+    - internal
+    depends_on:
+    - tor-privoxy
+    - elasticsearch
+    links:
+    - elasticsearch:elasticsearch
+    volumes:
+    - ./output:/opt/twint
 
   searchapp:
+    image: x0rzkov/twint-search:latest
     build:
       context: ./searchapp
       dockerfile: Dockerfile
     container_name: searchapp
     ports:
-      - 3000:3000
-    volumes:
-      - './searchapp:/usr/src/app'
-      - '/usr/src/app/node_modules'
+    - 3000:3000
+    # volumes:
+    # - './searchapp:/usr/src/app'
+    # - '/usr/src/app/node_modules'
     environment:
-      - NODE_ENV=development
+    - NODE_ENV=development
+    networks:
+    - internal
+    - web
+    depends_on:
+    - elasticsearch
+    links:
+    - elasticsearch:elasticsearch
 
   tor-privoxy:
     restart: always
@@ -32,7 +44,9 @@ services:
     - "9050:9050" # Tor proxy
     - "9051:9051" # Tor control port
     - "8118:8118" # Privoxy
-  
+    networks:
+    - internal
+    - web  
 
   elasticsearch:
     #restart: unless-stopped
@@ -44,12 +58,12 @@ services:
       context: ./elasticsearch
       dockerfile: Dockerfile
       args:
-        - CEREBRO_VERSION=0.7.2
+      - CEREBRO_VERSION=0.7.2
     container_name: elasticsearch
     entrypoint: /usr/share/elasticsearch/start
     ports:
-      - "9200:9200" # Elasticsearch
-      - "9000:9000" # Cerebro
+    - "9200:9200" # Elasticsearch
+    - "9000:9000" # Cerebro
     ulimits:
       memlock:
         soft: -1
@@ -61,20 +75,28 @@ services:
     #  - IPC_LOCK
     volumes:
     - esdata:/usr/share/elasticsearch/data
+    networks:
+    - internal
+    - web
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.0.1
     container_name: kibana
     ports:
-      - 5601:5601
+    - 5601:5601
+    networks:
+    - internal
+    - web
+    depends_on:
+    - elasticsearch
 
 volumes:
   esdata:
     driver: local
 
 networks:
-  default:
-    external:
-      name: nw_twint
+  internal:
+  web:
+    external: true
 
       
